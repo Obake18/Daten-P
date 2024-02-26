@@ -1,7 +1,15 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 
-export default function App() {
+const Cat = () =>{
+  const name = 'bios';
+  return <Text> Hello, I'm {name.toUpperCase()} </Text>
+
+}
+
+export default Cat;
+
+function App() {
   return (
     <View style={styles.container}>
       <Text>Zé da Manga!!</Text>
