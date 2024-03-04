@@ -1,22 +1,32 @@
+import { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Button } from 'react-native';
 
-const Cat = () =>{
+const Cat = () => {
   const name = 'bios';
   return <Text> Hello, I'm {name.toUpperCase()} </Text>
-
 }
 
-export default Cat;
+const App = () => {
+  const [clicks, setClicks] = useState(0);
 
-function App() {
+  const handleReset = () => {
+    setClicks(0);
+  };
+
   return (
     <View style={styles.container}>
-      <Text>Zé da Manga!!</Text>
+      <Button title="Aperta aí" onPress={() => setClicks(clicks + 1)} />
+      
+      <Button title="Reseta" onPress={handleReset} />
+
+      <Text> O BIOS apertou  {clicks} vezes </Text>
       <StatusBar style="auto" />
     </View>
-  );
+  )
 }
+
+export default App;
 
 const styles = StyleSheet.create({
   container: {
