@@ -1,189 +1,84 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, TextInput } from 'react-native';
+import { StyleSheet, Text, View, TextInput, Button } from 'react-native';
 
-/**
- * Componente principal que representa a calculadora React Native.
- */
 export default function App() {
-  // Estados para armazenar os valores, operação e resultado
-  const [input1, setInput1] = useState('');
-  const [input2, setInput2] = useState('');
+  const [input1, setInput1] = useState('0');
+  const [input2, setInput2] = useState('0');
   const [result, setResult] = useState('');
   const [operation, setOperation] = useState('+');
 
-  /**
-   * Manipulador de evento chamado quando o botão "=" é pressionado.
-   * Chama a função evaluateExpression para calcular o resultado.
-   */
-  const handleButtonPress = () => {
-    evaluateExpression();
-  };
+  const handleCalculate = () => {
+    const num1 = parseFloat(input1);
+    const num2 = parseFloat(input2);
 
-  /**
-   * Avalia a expressão com base nos valores inseridos e na operação selecionada.
-   * Exibe o resultado em tempo real e lida com possíveis erros.
-   */
-  const evaluateExpression = () => {
-    try {
-      const value1 = parseFloat(input1);
-      const value2 = parseFloat(input2);
+    if (!isNaN(num1) && !isNaN(num2)) {
+      let calculatedResult = 0;
 
-      if (!isNaN(value1) && !isNaN(value2)) {
-        switch (operation) {
-          case '+':
-            setResult((value1 + value2).toString());
-            break;
-          case '-':
-            setResult((value1 - value2).toString());
-            break;
-          case '*':
-            setResult((value1 * value2).toString());
-            break;
-          case '/':
-            if (value2 !== 0) {
-              setResult((value1 / value2).toString());
-            } else {
-              setResult('Divisão por zero');
-            }
-            break;
-          default:
-            setResult('Operação inválida');
-        }
-      } else {
-        setResult('Valores inválidos');
+      if (operation === '+') {
+        calculatedResult = num1 + num2;
+      } else if (operation === '-') {
+        calculatedResult = num1 - num2;
       }
-    } catch (error) {
-      setResult('Erro');
+
+      setResult(`Resultado: ${calculatedResult}`);
+    } else {
+      setResult('Por favor, insira números válidos.');
     }
   };
 
-  /**
-   * Reinicia a operação para a adição. Pode ser ajustado para a operação padrão desejada.
-   */
-  const clearOperations = () => {
-    setOperation('+');
-  };
-
-  // Estrutura da interface do usuário
   return (
     <View style={styles.container}>
-      {/* Entrada de Valores */}
-      <View style={styles.inputContainer}>
-        <TextInput
-          style={styles.input}
-          placeholder="Digite o primeiro valor"
-          keyboardType="numeric"
-          value={input1}
-          onChangeText={(text) => setInput1(text)}
-        />
-        <TextInput
-          style={styles.input}
-          placeholder="Digite o segundo valor"
-          keyboardType="numeric"
-          value={input2}
-          onChangeText={(text) => setInput2(text)}
-        />
+      <Text style={styles.title}>Calculando . . . </Text>
+      <TextInput
+        defaultValue={input1.toString()}
+        onChangeText={(texto) => setInput1(texto)}
+        keyboardType='numeric'
+        style={styles.input}
+      />
+      <TextInput
+        defaultValue={input2.toString()}
+        onChangeText={(texto) => setInput2(texto)}
+        keyboardType='numeric'
+        style={styles.input}
+      />
+
+      <View style={styles.buttonContainer}>
+        <Button title="Somando" onPress={() => setOperation('+')} color="gray" />
+        <Button title="Subtraindo " onPress={() => setOperation('-')} color="gray" />
+        <Button title="Calcular" onPress={handleCalculate} color="gray" />
       </View>
 
-      {/* Botões de Operação */}
-      <View style={styles.operationContainer}>
-        <TouchableOpacity
-          style={styles.operationButton}
-          onPress={() => setOperation('+')}>
-          <Text>+</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.operationButton}
-          onPress={() => setOperation('-')}>
-          <Text>-</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.operationButton}
-          onPress={() => setOperation('*')}>
-          <Text>*</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.operationButton}
-          onPress={() => setOperation('/')}>
-          <Text>/</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.clearButton}
-          onPress={() => clearOperations()}>
-          <Text>Limpar</Text>
-        </TouchableOpacity>
-      </View>
-
-      {/* Resultado */}
-      <View style={styles.resultContainer}>
-        <Text style={styles.result}>{result}</Text>
-      </View>
-
-      {/* Botão de Igual */}
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => handleButtonPress()}>
-        <Text>=</Text>
-      </TouchableOpacity>
+      <Text style={styles.result}>{result}</Text>
     </View>
   );
 }
 
-// Estilos para a interface da calculadora
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white',
-    alignItems: 'center',
     justifyContent: 'center',
+    alignItems: 'center',
+    paddingHorizontal: 20,
   },
-  inputContainer: {
+  title: {
+    fontSize: 18,
     marginBottom: 10,
   },
   input: {
-    fontSize: 24,
+    height: 40,
+    borderColor: 'gray',
     borderWidth: 1,
-    borderColor: '#DDDDDD',
-    borderRadius: 5,
-    padding: 10,
     marginBottom: 10,
-    width: 200,
-    textAlign: 'center',
+    paddingHorizontal: 10,
+    width: '100%',
   },
-  operationContainer: {
+  buttonContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginBottom: 10,
-  },
-  operationButton: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#DDDDDD',
-    borderRadius: 5,
-    padding: 15,
-    marginHorizontal: 5,
-  },
-  clearButton: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#DDDDDD',
-    borderRadius: 5,
-    padding: 15,
-    marginHorizontal: 5,
-  },
-  resultContainer: {
-    marginBottom: 20,
+    width: '100%',
   },
   result: {
-    fontSize: 36,
-    fontWeight: 'bold',
-  },
-  button: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#DDDDDD',
-    borderRadius: 5,
-    padding: 20,
-    margin: 5,
+    fontSize: 16,
   },
 });
