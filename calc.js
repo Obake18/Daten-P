@@ -1,28 +1,16 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, TextInput } from 'react-native';
 
-/**
- * Componente principal que representa a calculadora React Native.
- */
 export default function App() {
-  // Estados para armazenar os valores, operação e resultado
   const [input1, setInput1] = useState('');
   const [input2, setInput2] = useState('');
   const [result, setResult] = useState('');
   const [operation, setOperation] = useState('+');
 
-  /**
-   * Manipulador de evento chamado quando o botão "=" é pressionado.
-   * Chama a função evaluateExpression para calcular o resultado.
-   */
   const handleButtonPress = () => {
     evaluateExpression();
   };
 
-  /**
-   * Avalia a expressão com base nos valores inseridos e na operação selecionada.
-   * Exibe o resultado em tempo real e lida com possíveis erros.
-   */
   const evaluateExpression = () => {
     try {
       const value1 = parseFloat(input1);
@@ -57,17 +45,12 @@ export default function App() {
     }
   };
 
-  /**
-   * Reinicia a operação para a adição. Pode ser ajustado para a operação padrão desejada.
-   */
   const clearOperations = () => {
-    setOperation('+');
+    setOperation('+'); // Pode ser ajustado para a operação padrão desejada
   };
 
-  // Estrutura da interface do usuário
   return (
     <View style={styles.container}>
-      {/* Entrada de Valores */}
       <View style={styles.inputContainer}>
         <TextInput
           style={styles.input}
@@ -84,8 +67,6 @@ export default function App() {
           onChangeText={(text) => setInput2(text)}
         />
       </View>
-
-      {/* Botões de Operação */}
       <View style={styles.operationContainer}>
         <TouchableOpacity
           style={styles.operationButton}
@@ -113,13 +94,9 @@ export default function App() {
           <Text>Limpar</Text>
         </TouchableOpacity>
       </View>
-
-      {/* Resultado */}
       <View style={styles.resultContainer}>
         <Text style={styles.result}>{result}</Text>
       </View>
-
-      {/* Botão de Igual */}
       <TouchableOpacity
         style={styles.button}
         onPress={() => handleButtonPress()}>
@@ -129,7 +106,6 @@ export default function App() {
   );
 }
 
-// Estilos para a interface da calculadora
 const styles = StyleSheet.create({
   container: {
     flex: 1,
