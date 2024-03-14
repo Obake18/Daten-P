@@ -58,6 +58,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
   },
   logo: {
+    
     marginTop: 20, // Coloca a imagem no topo da tela
     marginBottom: 40,
   },
