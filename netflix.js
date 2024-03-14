@@ -13,6 +13,7 @@ const App = () => {
 
   return (
     <View style={styles.container}>
+      <StatusBar backgroundColor="black" />
       <Image source={require('./assets/Logo/Rectangle 1ntflx.png')} style={styles.logo} />
       <Text style={styles.ajuda}>Ajuda</Text>
       <Image source={require('./assets/Logo/voltar.png')} style={styles.voltar} />
@@ -39,7 +40,10 @@ const App = () => {
         <TouchableOpacity>
           <Text style={styles.forgotPassword}>Recuperar Senha</Text>
         </TouchableOpacity>
-        <Text style={styles.captcha}>O acesso está protegido pelo Google reCAPTCHA para garantir que você não é um robô. Saiba mais.</Text>
+        <Text style={styles.captcha}>
+          O acesso está protegido pelo Google reCAPTCHA para garantir que você não é um robô.{' '}
+          <Text style={{ fontWeight: 'bold' }}>Saiba mais</Text>.
+        </Text>
       </View>
     </View>
   );
@@ -54,8 +58,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
   },
   logo: {
-    marginTop: 50, // Coloca a imagem no topo da tela
-    marginBottom: 0,
+    marginTop: 20, // Coloca a imagem no topo da tela
+    marginBottom: 40,
   },
   formContainer: {
     flex: 1,
@@ -84,7 +88,7 @@ const styles = StyleSheet.create({
     left: 400,
     padding:0,
     margin:0,
-    top: 50,
+    top: 15,
     fontSize: 16,
     textDecorationLine: 'underline',
   },
@@ -110,7 +114,7 @@ const styles = StyleSheet.create({
     right: 410,
     padding:0,
     margin:0,
-    top: 55,
+    top: 15,
   },
   forgotPassword: {
     marginTop: 20,
