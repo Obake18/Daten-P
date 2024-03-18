@@ -14,9 +14,9 @@ const App = () => {
   return (
     <View style={styles.container}>
       <StatusBar backgroundColor="black" />
-      <Image source={require('./assets/Logo/Rectangle 1ntflx.png')} style={styles.logo} />
+      <Image source={require('./assets/Logo/netflix-logo.png')} style={styles.logo} />
       <Text style={styles.ajuda}>Ajuda</Text>
-      <Image source={require('./assets/Logo/voltar.png')} style={styles.voltar} />
+      <Image source={require('/.assets/botao/voltar.png')} style={styles.voltar} />
       <View style={styles.formContainer}>
         <TextInput
           style={styles.input}
@@ -33,13 +33,13 @@ const App = () => {
           value={password}
           onChangeText={text => setPassword(text)}
         />
-
-        <TouchableOpacity style={styles.button} onPress={handleLogin}>
+        <Pressable style={styles.button} onPress={handleLogin}>
           <Text style={styles.buttonText}>Entrar</Text>
-        </TouchableOpacity>
-        <TouchableOpacity>
+        </Pressable>
+        <Pressable>
           <Text style={styles.forgotPassword}>Recuperar Senha</Text>
-        </TouchableOpacity>
+        </Pressable>
+
         <Text style={styles.captcha}>
           O acesso está protegido pelo Google reCAPTCHA para garantir que você não é um robô.{' '}
           <Text style={{ fontWeight: 'bold' }}>Saiba mais</Text>.
@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
   },
   logo: {
-    
+
     marginTop: 20, // Coloca a imagem no topo da tela
     marginBottom: 40,
   },
@@ -86,10 +86,10 @@ const styles = StyleSheet.create({
   ajuda: {
     position: 'absolute',
     color: '#fff',
-    marginTop:0,
+    marginTop: 0,
     left: 400,
-    padding:0,
-    margin:0,
+    padding: 0,
+    margin: 0,
     top: 15,
     fontSize: 16,
     textDecorationLine: 'underline',
@@ -108,14 +108,14 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
 
-  voltar:{
+  voltar: {
     width: 50,
     height: 50,
     position: 'absolute',
-    marginTop:0,
+    marginTop: 0,
     right: 410,
-    padding:0,
-    margin:0,
+    padding: 0,
+    margin: 0,
     top: 15,
   },
   forgotPassword: {
