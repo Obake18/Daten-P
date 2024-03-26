@@ -11,8 +11,10 @@ const App = () => {
     console.log('Password:', password);
   };
 
-  return (
-    <View style={styles.container}>
+  return newFunction();
+
+  function newFunction() {
+    return <View style={styles.container}>
       <StatusBar backgroundColor="black" />
       <Image source={require('./assets/Logo/netflix-logo.png')} style={styles.logo} />
       <Text style={styles.ajuda}>Ajuda</Text>
@@ -23,16 +25,14 @@ const App = () => {
           placeholder="Email ou número de telefone"
           placeholderTextColor='#999' // Cor do placeholder
           value={email}
-          onChangeText={text => setEmail(text)}
-        />
+          onChangeText={text => setEmail(text)} />
         <TextInput
           style={styles.input}
           placeholder="Senha"
           secureTextEntry
           placeholderTextColor='#999' // Cor do placeholder
           value={password}
-          onChangeText={text => setPassword(text)}
-        />
+          onChangeText={text => setPassword(text)} />
         <Pressable style={styles.button} onPress={handleLogin}>
           <Text style={styles.buttonText}>Entrar</Text>
         </Pressable>
@@ -45,8 +45,8 @@ const App = () => {
           <Text style={{ fontWeight: 'bold' }}>Saiba mais</Text>.
         </Text>
       </View>
-    </View>
-  );
+    </View>;
+  }
 };
 
 
